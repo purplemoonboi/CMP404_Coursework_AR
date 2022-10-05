@@ -2,13 +2,22 @@
 
 #include "CustomPawn.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Camera/CameraComponent.h"
 #include "ARBlueprintLibrary.h"
+
 
 // Sets default values
 ACustomPawn::ACustomPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+	SetRootComponent(SceneComponent);
+
+	CameraComponent = CreateAbstractDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
+	CameraComponent->SetupAttachment(SceneComponent);
+
 
 }
 

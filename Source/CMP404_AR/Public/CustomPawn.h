@@ -6,6 +6,9 @@
 #include "GameFramework/Pawn.h"
 #include "CustomPawn.generated.h"
 
+/** forward declarations */
+class UCameraComponent;
+
 UCLASS()
 class CMP404_AR_API ACustomPawn : public APawn
 {
@@ -14,6 +17,15 @@ class CMP404_AR_API ACustomPawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ACustomPawn();
+
+protected:
+
+	/** variables */
+	UPROPERTY(Category = "SceneComponent", VisibleAnywhere, BlueprintReadWrite)
+	USceneComponent* SceneComponent;
+
+	UPROPERTY(Category = "CameraComponent", VisibleAnywhere, BlueprintReadWrite)
+	UCameraComponent* CameraComponent;
 
 protected:
 	// Called when the game starts or when spawned
