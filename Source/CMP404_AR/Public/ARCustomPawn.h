@@ -4,21 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "CustomPawn.generated.h"
+#include "ARCustomPawn.generated.h"
 
 /** forward declarations */
 class UCameraComponent;
 
 UCLASS()
-class CMP404_AR_API ACustomPawn : public APawn
+class CMP404_AR_API AARCustomPawn : public APawn
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this pawn's properties
-	ACustomPawn();
+	AARCustomPawn();
 
 protected:
+
+	/* variables exposed in editor */
 
 	/** variables */
 	UPROPERTY(Category = "SceneComponent", VisibleAnywhere, BlueprintReadWrite)
@@ -28,14 +30,27 @@ protected:
 	UCameraComponent* CameraComponent;
 
 protected:
+
+	/* inherited functions */
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
+
+	/* unreal game loop functions */
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+public:
+
+	/* public functions */
+
+	
+protected:
 
 };

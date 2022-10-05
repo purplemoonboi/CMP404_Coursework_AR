@@ -23,7 +23,7 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	void SpawnAsset();
+	void SpawnAsset() const;
 protected:
 
 

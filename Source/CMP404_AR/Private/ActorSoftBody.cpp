@@ -43,22 +43,59 @@ void AActorSoftBody::BeginPlay()
 	
 }
 
+void AActorSoftBody::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	/** after initialising the actor, store it's position on spawn */
+	ActorSpawnLoc = GetActorLocation();
+}
+
 // Called every frame
 void AActorSoftBody::Tick(float DeltaTime)
 {
+	// Calculate the elapsed time since the actor has been spawned
 	ElapsedTime = FPlatformTime::Seconds() - StartSeconds;
 	Super::Tick(DeltaTime);
-	SetActorLocation(GetActorLocation() + InfinityTranslation(ElapsedTime));
+	
+	//SetActorLocation(GetActorLocation() + InfinityTranslation(ElapsedTime));
+	FMatrix TranslationMatrix = FMatrix::Identity;
+	FMatrix InitialMatrix = FMatrix::Identity;
+	FMatrix FinalMatrix = FMatrix::Identity;
+	const FVector newPos =  InfinityTranslation(ElapsedTime);
+
+	// Store the initial spawn location
+	InitialMatrix = InitTranslationMatrix(ActorSpawnLoc);
+	TranslationMatrix = InitTranslationMatrix(newPos);
+
+	FinalMatrix = TranslationMatrix * InitialMatrix;
+	SetActorTransform(FTransform(FinalMatrix));
+
 }
 
-FVector AActorSoftBody::InfinityTranslation(const float time)
+FVector AActorSoftBody::InfinityTranslation(const float Time)
 {
-	const float scale = 2.f / (3.f - UKismetMathLibrary::Cos(2.f * time));
+	const float scale = 2.f / (3.f - UKismetMathLibrary::Cos(2.f * Time));
 	return 
 	{
-		scale * UKismetMathLibrary::Cos(time), 
-		scale* UKismetMathLibrary::Sin(2 * time),
+		scale * UKismetMathLibrary::Cos(Time), 
+		scale* UKismetMathLibrary::Sin(2 * Time),
 		0.0f
 	};
+}
+
+FMatrix AActorSoftBody::InitTranslationMatrix(const float X, const float Y, const float Z)
+{
+	FMatrix matrix = FMatrix::Identity;
+	matrix.M[3][0] = X;
+	matrix.M[3][1] = Y;
+	matrix.M[3][2] = Z;
+
+	return matrix;
+}
+
+FMatrix AActorSoftBody::InitTranslationMatrix(FVector Vector)
+{
+	return InitTranslationMatrix(Vector.X, Vector.Y, Vector.Z);
 }
 

@@ -12,7 +12,7 @@ int32& AARGameStateBase::GetScore()
 	return Score;
 }
 
-void AARGameStateBase::SetScore(int32 newScore)
+void AARGameStateBase::SetScore(int32 NewScore)
 {
-	Score = newScore;
+	Score = NewScore;
 }

@@ -27,20 +27,32 @@ protected:
 	UPROPERTY(Category = "StaticMeshComponent", VisibleAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* StaticMeshComponent;
 
-public:	
+	UPROPERTY(Category = "Gameplay", VisibleAnywhere,  BlueprintReadOnly)
+	FVector ActorSpawnLoc;
+	
+public:
+	// Invoked once components have been initialised
+	virtual void PostInitializeComponents() override;
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
 
 private:
 
 	UFUNCTION(Category = "Gameplay", BlueprintCallable)
-	FVector InfinityTranslation(const float time);
+	FVector InfinityTranslation(const float Time);
 
 
 private:
+
+	FMatrix InitTranslationMatrix(const float X, const float Y, const float Z);
+	
+	FMatrix InitTranslationMatrix(FVector Point);
 
 	// Variables that need not be exposed to the editor.
 	
 	double StartSeconds = 0.0f, ElapsedTime = 0.0f;
 
+	
 };

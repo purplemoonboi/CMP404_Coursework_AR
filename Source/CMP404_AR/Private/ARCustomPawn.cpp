@@ -1,13 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "CustomPawn.h"
+#include "ARCustomPawn.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "ARBlueprintLibrary.h"
 
 
 // Sets default values
-ACustomPawn::ACustomPawn()
+AARCustomPawn::AARCustomPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -22,7 +22,7 @@ ACustomPawn::ACustomPawn()
 }
 
 // Called when the game starts or when spawned
-void ACustomPawn::BeginPlay()
+void AARCustomPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
@@ -30,17 +30,19 @@ void ACustomPawn::BeginPlay()
 
 	UARSessionConfig* Config = NewObject<UARSessionConfig>();
 	UARBlueprintLibrary::StartARSession(Config);
+
+
 }
 
 // Called every frame
-void ACustomPawn::Tick(float DeltaTime)
+void AARCustomPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
 // Called to bind functionality to input
-void ACustomPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AARCustomPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 

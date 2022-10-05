@@ -4,12 +4,12 @@
 #include "ARGameModeBase.h"
 #include "ARGameStateBase.h"
 #include "ActorSoftBody.h"
-#include "CustomPawn.h"
+#include "ARCustomPawn.h"
 
 AARGameModeBase::AARGameModeBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	DefaultPawnClass = ACustomPawn::StaticClass();
+	DefaultPawnClass = AARCustomPawn::StaticClass();
 	GameStateClass = AARGameStateBase::StaticClass();
 }
 
@@ -33,10 +33,10 @@ void AARGameModeBase::Tick(float DeltaSeconds)
 	
 }
 
-void AARGameModeBase::SpawnAsset()
+void AARGameModeBase::SpawnAsset() const
 {
-	FActorSpawnParameters SpawnInfo;
-	FRotator MyRotator(0, 0, 0);
-	FVector MyVector(300, 0, 0);
+	const FActorSpawnParameters SpawnInfo;
+	const FRotator MyRotator(0, 0, 0);
+	const FVector MyVector(150, 0, -50);
 	AActorSoftBody* SpawnedActor = GetWorld()->SpawnActor<AActorSoftBody>(MyVector, MyRotator, SpawnInfo);
 }
