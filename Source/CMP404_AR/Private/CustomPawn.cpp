@@ -15,7 +15,7 @@ ACustomPawn::ACustomPawn()
 	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
 	SetRootComponent(SceneComponent);
 
-	CameraComponent = CreateAbstractDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 	CameraComponent->SetupAttachment(SceneComponent);
 
 
